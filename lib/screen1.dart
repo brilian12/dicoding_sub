@@ -36,14 +36,16 @@ class Screen1 extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Daftar List Film"),
-      ),
-      body: ListView.builder(
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text("Daftar List Film"),
+    ),
+    body: SafeArea(
+      child: ListView.builder(
         itemCount: movies.length,
         itemBuilder: (context, index) {
+          final movie = movies[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
@@ -56,30 +58,35 @@ class Screen1 extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return screen2();
-                    }));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => screen2()
+                        ),
+                      );
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
-                        movies[index]['poster']!,
+                        movie['poster']!,
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        movies[index]['title']!,
-                        style: TextStyle(
+                        movie['title']!,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis, // Membatasi overflow teks
                       ),
                     ),
                   ),
@@ -89,6 +96,7 @@ class Screen1 extends StatelessWidget {
           );
         },
       ),
-    );
-  }
+    ),
+  );
+}
 }
