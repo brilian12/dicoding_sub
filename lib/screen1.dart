@@ -39,7 +39,7 @@ class Screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Daftar Film"),
+        title: Text("Daftar List Film"),
       ),
       body: ListView.builder(
         itemCount: movies.length,
